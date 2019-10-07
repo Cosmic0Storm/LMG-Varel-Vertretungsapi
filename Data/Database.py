@@ -13,9 +13,7 @@ class Database:
         self.cursor=self.sql.cursor()
 
     def set(self,Data):
-        print(Data.Name)
         if not isinstance(Data,Data.__class__):
-            print("IDiot")
             return
         self.cursor.execute("show tables")
         if Data.Name not in self.cursor.fetchall():
@@ -27,21 +25,16 @@ class Database:
                 self.cursor.execute('''INSERT INTO `{name}` VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}');'''.format(*Data.Table[a],name=Data.Name))
         self.cursor.execute("select * from `{name}`".format(name=Data.Name))
         Table=self.cursor.fetchall()
-        print(Data.Table)
         for c in range(len(Table)):
             if list(Table[c]) not in Data.Table:
-                print(list(Table[c]))
                 self.cursor.execute('''delete from `{name}` where `Klasse`='{0}' and `Fach`='{3}' and `Stunde`='{1}' '''.format(*Table[c],name=Data.Name))
         self.sql.commit()
     def get(self,Req):
-        print((Req.Day,Req.Klasse))
         if not Req.All:
             self.cursor.execute("select * from `{name}` where `Klasse`='{Klasse}'".format(name=Req.Day,Klasse=Req.Klasse))
             Klasse=self.cursor.fetchall()
             Res=[]
             for row in Klasse:
-                print(row)
-                print(not any(i.isdigit() for i in row[3]) and row[3].isupper())
                 if len(row[3])>2 and any(i.isdigit() for i in row[3]) and row[3] in Req.Kurse:
                         Res.append(row)
                 elif row[3] in ["LA","FR","SPA"] and row[3] in Req.Kurse:
@@ -56,8 +49,6 @@ class Database:
             Res=[]
             for tup in tupRes:
                 Res.append(list(tup))
-            print(Res)
-        print(Res)
         return Res
     def log(self,Info):
         pass
