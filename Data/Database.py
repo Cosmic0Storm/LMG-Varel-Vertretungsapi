@@ -1,13 +1,14 @@
 import mysql.connector
 from Base import Data
+from config import Mysql
 class Database:
 
     def __init__(self):
         self.sql=mysql.connector.connect(
-            host="localhost",
-            user="Iservtest",
-            passwd="a-sdgd-adadolä",
-            database="Iservtest"
+            host=Mysql.host,
+            user=Mysql.user,
+            passwd=Mysql.paswd,
+            database=Mysql.database
         )
         self.cursor=self.sql.cursor()
 
