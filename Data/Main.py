@@ -91,10 +91,11 @@ class Update_Thread(threading.Thread):
             time.sleep(10)
     
 if __name__=="__main__":
-    #D=Update_Thread("morgen")
-    #D.start()
+    Days=["heute","morgen"]
+    for day in Days:
+        Thread=Update_Thread(day)
+        Thread.start()
     C=Check()
-    C.getoneDayinfuture()
-    D=Database()
-    D.get(UserRequest("2019-10-21",True))
+    C.start()
+    
     
