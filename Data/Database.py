@@ -50,5 +50,3 @@ class Database:
             for tup in tupRes:
                 Res.append(list(tup))
         return Res
-    def log(self,Info):
-        pass

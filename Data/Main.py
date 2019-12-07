@@ -5,7 +5,7 @@ import schedule
 import time
 from Base import Data,UserRequest
 from Database import Database
-from Kontroll import Check
+#from Kontroll import Check
 from config import Iserv
 class Update_Thread(threading.Thread):
     URls={"login":"https://lmg-varel.eu/iserv/login_check",
@@ -39,20 +39,6 @@ class Update_Thread(threading.Thread):
                     row.append(td.text)
             if len(row)>0:
                 Table.append(row)
-        for tab in range(len(Table)):
-            try:
-                    if int(list(Table[tab])[0])== int(list(Table[tab+1])[0]):
-                        if int(list(Table[tab+1])[0])==int(list(Table[tab+2])[0]):
-                            String=Table[tab]+','+Table[tab+1]+','+Table[tab+2]
-                        else:
-                            String = Table[tab] + ',' + Table[tab + 1]
-                        Res_List.append(String)
-                    else:
-                        Res_List.append(Table[tab])
-            except IndexError:
-                pass
-            except ValueError:
-                Res_List.append(Table[tab])
         Standsoup=soup.find("p")
         Stand=Standsoup.text[Standsoup.text.find("Stand")+7:]
         print(Stand)
@@ -75,12 +61,6 @@ class Update_Thread(threading.Thread):
         except requests.exceptions.ReadTimeout as errc:
             print('ReadTimeout')
             print(errc)
-        except requests.exceptions.ReadTimeout as errc:
-            print('ReadTimeout')
-            print(errc)
-        except requests.exceptions.ReadTimeout as errc:
-            print('ReadTimeout')
-            print(errc)
 
     def run(self):
         self.work()
@@ -95,7 +75,7 @@ if __name__=="__main__":
     for day in Days:
         Thread=Update_Thread(day)
         Thread.start()
-    C=Check()
-    C.start()
+    #C=Check()
+    #C.start()
     
     
