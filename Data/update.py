@@ -3,10 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 import schedule
 import time
-from Base import Data,UserRequest
-from Database import Database
-#from Kontroll import Check
-from config import Iserv
+from Data.base import Data
+from Data.database import Database
+from Data.config import Iserv
 class Update_Thread(threading.Thread):
     URls={"login":"https://lmg-varel.eu/iserv/login_check",
           "morgen":"https://lmg-varel.eu/iserv/infodisplay/file/205/plan/0/schuelermorgeninternet/subst_001.htm",
@@ -64,17 +63,15 @@ class Update_Thread(threading.Thread):
 
     def run(self):
         self.work()
-        schedule.every(2).minutes.do(self.work)
+        schedule.every(1).minutes.do(self.work)
         schedule.every().day.at("00:00").do(self.Data.clear)
         while True:
             schedule.run_pending()
             time.sleep(10)
     
 if __name__=="__main__":
-    Days=["heute","morgen"]
-    for day in Days:
-        Thread=Update_Thread(day)
-        Thread.start()
+    Heute=Update_Thread("heute").start()
+    Morgen=Update_Thread("morgen").start()
     #C=Check()
     #C.start()
     

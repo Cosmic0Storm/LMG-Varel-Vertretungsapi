@@ -3,7 +3,7 @@ class Data:
         self.Time=Stand.split(" ")[1]
         self.Table=Table
         Namespli=Name.split(" ")[0].split(".")
-        self.Name="{0}-{1}-{2}".format(Namespli[-1],Namespli[-2],Namespli[-3])
+        self.Name="{0}-{1}-{2}".format(Namespli[-1],Namespli[-2] if len(Namespli[-2])>1 else "0"+Namespli[-2],Namespli[-3] if len(Namespli[-3])>1 else "0"+Namespli[-3])
         Daspli=Stand.split(" ")[0].split(".")
         self.Date="{0}-{1}-{2}".format(Daspli[-1],Daspli[-2],Daspli[-3])
 
@@ -30,13 +30,3 @@ class Data:
         self.Date=""
         self.Time=""
         self.Table=[[]]
-
-class UserRequest:
-     def __init__(self,Day,All,Klasse="",Kurs=[]):
-        if not All and Klasse=="" and Kurs==[]:
-            return
-        self.Day=Day
-        self.All=All
-        self.Klasse=Klasse
-        self.Kurse=Kurs
-        #Maybe some logging Information
