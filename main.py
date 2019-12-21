@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restplus import Api, Resource, fields
 from Data.database import Database
+from Data.update import Update_Thread
 from functions import getDate
 app=Flask(__name__)
 api=Api(app)
@@ -35,4 +36,6 @@ class Vertretung(Resource):
     
 
 if __name__=='__main__':
+    Update_Thread("heute").start()
+    Update_Thread("morgen").start()
     app.run(debug=True)

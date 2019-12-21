@@ -63,7 +63,7 @@ class Update_Thread(threading.Thread):
 
     def run(self):
         self.work()
-        schedule.every(1).minutes.do(self.work)
+        schedule.every(5).minutes.do(self.work)
         schedule.every().day.at("00:00").do(self.Data.clear)
         while True:
             schedule.run_pending()
