@@ -1,5 +1,5 @@
 import mysql.connector
-from Data.base import Data
+from Data.Base import Data
 from Data.config import Mysql
 class Database:
 

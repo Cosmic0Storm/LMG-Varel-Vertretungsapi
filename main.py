@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restplus import Api, Resource, fields
-from Data.database import Database
+from Data.Database import Database
 from Data.update import Update_Thread
 from functions import getDate
 app=Flask(__name__)

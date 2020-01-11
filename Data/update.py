@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import requests
 import schedule
 import time
-from Data.base import Data
-from Data.database import Database
+from Data.Base import Data
+from Data.Database import Database
 from Data.config import Iserv
 class Update_Thread(threading.Thread):
     URls={"login":"https://lmg-varel.eu/iserv/login_check",
