@@ -1,6 +1,6 @@
 ## Script zum Speichern des Vertrretungsplan des LMG
 
 
-#Run
+Run
 
     python3 main.py -D {heute:morgen}
