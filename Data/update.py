@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 import schedule
 import time
-from Data.Base import Data
-from Data.Database import Database
-from Data.config import Iserv
+from Base import Data
+from Database import Database
+from config import Iserv
 class Update_Thread(threading.Thread):
     URls={"login":"https://lmg-varel.eu/iserv/login_check",
           "morgen":"https://lmg-varel.eu/iserv/infodisplay/file/205/plan/0/schuelermorgeninternet/subst_001.htm",
@@ -56,7 +56,8 @@ class Update_Thread(threading.Thread):
                 self.Data=nData 
         except requests.exceptions.ConnectionError as errc:
             print('ConnectionError')
-            print(errc) 
+            print(errc)
+             
         except requests.exceptions.ReadTimeout as errc:
             print('ReadTimeout')
             print(errc)

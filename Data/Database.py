@@ -1,6 +1,6 @@
 import mysql.connector
-from Data.Base import Data
-from Data.config import Mysql
+from Base import Data
+from config import Mysql
 class Database:
 
     def __init__(self):
