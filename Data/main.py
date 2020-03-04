@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import sys
 import update
 from Database import Database
