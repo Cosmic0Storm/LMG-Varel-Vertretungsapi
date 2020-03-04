@@ -9,7 +9,6 @@ from Database import Database
 from config import Iserv
 
 logging.basicConfig(filename="iserv.log",level=logging.CRITICAL,format="%(asctime)s:%(message)s")
-logging.warning("")
 
 
 
@@ -54,21 +53,16 @@ class Update_Thread(threading.Thread):
         return Data(Stand,Table,Namesoup.text)
     def work(self):
         try:
-            print("Woke up")
             nData=self.getData()
             print(self.Data==nData)
             if self.Data!=nData:
-                print("Data anders")
-                print(nData.Table)
+                logging.debug("Data changed")
                 self.DB.set(nData)
                 self.Data=nData 
         except requests.exceptions.ConnectionError as errc:
-            print('ConnectionError')
-            print(errc)
-             
+            logging.exception("Connection Error")
         except requests.exceptions.ReadTimeout as errc:
-            print('ReadTimeout')
-            print(errc)
+            logging.exception("Read Timeout")
 
     def run(self):
         self.work()

@@ -1,5 +1,4 @@
-## Script zum Speichern des Vertrretungsplan des LMG
-
+# Script zum Speichern des Vertrretungsplan des LMG
 
 Run
 

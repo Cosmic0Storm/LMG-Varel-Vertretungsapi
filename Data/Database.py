@@ -17,9 +17,9 @@ class Database:
             return
         self.cursor.execute("show tables")
         if (Data.Name,) not in self.cursor.fetchall():
-            self.cursor.execute('''CREATE TABLE  if not exists`{0}` (   `Klasse` tinytext,   `Stunde` tinytext,   `Vertreter` tinytext,   `Fach` tinytext,   `Raum` tinytext,   `Entfallener_Lehrer` tinytext,   `Entfallenes_Fach` tinytext) ENGINE=InnoDB DEFAULT CHARSET=utf8;'''.format(Data.Name))
+            self.cursor.execute('''CREATE TABLE  if not exists`{0}` (   `Date` tinytext,`Klasse` tinytext,   `Stunde` tinytext,   `Vertreter` tinytext,   `Fach` tinytext,   `Raum` tinytext,   `Entfallener_Lehrer` tinytext,   `Entfallenes_Fach` tinytext) ENGINE=InnoDB DEFAULT CHARSET=utf8;'''.format(Data.Name))
         for a in range(len(Data.Table)):
-            self.cursor.execute("""UPDATE `{name}` SET `Vertreter`='{2}',`Fach`='{3}',`Raum`='{4}',`Entfallener_Lehrer`='{5}',`Entfallenes_Fach`='{6}' WHERE `Klasse`='{0}' AND `Stunde`='{1}'; """.format(*Data.Table[a],name=Data.Name))
+            self.cursor.execute("""UPDATE `{name}` SET `Date`='{date}',`Vertreter`='{2}',`Fach`='{3}',`Raum`='{4}',`Entfallener_Lehrer`='{5}',`Entfallenes_Fach`='{6}' WHERE `Klasse`='{0}' AND `Stunde`='{1}'; """.format(*Data.Table[a],name=Data.Name,date=Data.Date))
             self.cursor.execute("""SELECT COUNT(1) FROM `{name}` WHERE `Klasse`='{0}' and `Stunde`='{1}'""".format(*Data.Table[a],name=Data.Name))
             if  self.cursor.fetchall()[0][0]==0:
                 self.cursor.execute('''INSERT INTO `{name}` VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}');'''.format(*Data.Table[a],name=Data.Name))
