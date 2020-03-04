@@ -3,9 +3,17 @@ from bs4 import BeautifulSoup
 import requests
 import schedule
 import time
+import logging
 from Base import Data
 from Database import Database
 from config import Iserv
+
+logging.basicConfig(filename="iserv.log",level=logging.CRITICAL,format="%(asctime)s:%(message)s")
+logging.warning("")
+
+
+
+
 class Update_Thread(threading.Thread):
     URls={"login":"https://lmg-varel.eu/iserv/login_check",
           "morgen":"https://lmg-varel.eu/iserv/infodisplay/file/205/plan/0/schuelermorgeninternet/subst_001.htm",
@@ -73,7 +81,5 @@ class Update_Thread(threading.Thread):
 if __name__=="__main__":
     Heute=Update_Thread("heute").start()
     Morgen=Update_Thread("morgen").start()
-    #C=Check()
-    #C.start()
     
     

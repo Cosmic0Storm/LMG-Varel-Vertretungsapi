@@ -29,26 +29,3 @@ class Database:
             if list(Table[c]) not in Data.Table:
                 self.cursor.execute('''delete from `{name}` where `Klasse`='{0}' and `Fach`='{3}' and `Stunde`='{1}' '''.format(*Table[c],name=Data.Name))
         self.sql.commit()
-    def get(self,json):
-        if not json['Nutzer']['Erweitert']:
-            self.cursor.execute("select * from `{name}` where `Klasse`='{Klasse}'".format(name=json['Date'],Klasse=json['Nutzer']['Klasse']))
-            Klasse=self.cursor.fetchall()
-            Res=[]
-            for row in Klasse:
-                if len(row[6])>2 and any(i.isdigit() for i in row[6]) and row[6] in json['Nutzer']['Kurse']:
-                        Res.append(row)
-                elif row[6] in ["LA","FR","SPA"] and row[6] in json['Nutzer']['Kurse']:
-                    Res.append(row)
-                elif  not any(i.isdigit() for i in row[6]) and row[6].isupper():
-                    Res.append(row)
-        else:
-            self.cursor.execute('''select * from `{name}`'''.format(name=json['Date']))
-            tupRes=self.cursor.fetchall()
-            Res=[]
-            for tup in tupRes:
-                Res.append(list(tup))
-        return Res
-
-    def getTables(self):
-        self.cursor.execute('show tables')
-        return self.cursor.fetchall()
